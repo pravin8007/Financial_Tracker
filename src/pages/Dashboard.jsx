@@ -51,7 +51,7 @@ function Dashboard() {
     addTransaction(newTransaction);
   }
 
-  async function addTransaction(transaction, many) {
+  async function addTransaction(transaction) {
     try {
       const docRef = await addDoc(
         collection(db, `users/${user.uid}/transactions`),
@@ -62,11 +62,11 @@ function Dashboard() {
       setTransactions(newArr);
       calculateBanlance();
       console.log("Document written with ID: ", docRef.id);
-      if (!many) toast.success("Transaction Added!")
+      toast.success("Transaction Added!")
 
     } catch (e) {
       console.error("Error adding document: ", e);
-      if (!many) toast.error("Couldn't add transaction");
+      toast.error("Couldn't add transaction");
     }
   }
 
