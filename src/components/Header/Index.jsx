@@ -16,7 +16,7 @@ function Header() {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   }, [user, loading, navigate]);
 

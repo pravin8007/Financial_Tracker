@@ -123,7 +123,7 @@ function SignupSigninComponent() {
           email: email,
           photoURL: user.photoURL ? user.photoURL : "",
           createdAt: createdAt,
-        });
+        }); 
         toast.success("Doc Created !")
         setLoading(false);
       } catch (e) {

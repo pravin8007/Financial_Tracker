@@ -1,5 +1,5 @@
 
-import { Button, Modal, Form, Input, DatePicker, Select } from "antd"
+import { Button, Modal, Form, Input, DatePicker, Select } from "antd" 
 
 function AddIncome(prop) {
 

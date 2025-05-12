@@ -40,6 +40,13 @@ function Dashboard() {
   }
 
   const onFininsh = (values, type) => {
+     const amount = parseFloat(values.amount);
+
+  if (type === "expense" && amount > totalBalance) {
+    toast.error("Cannot add expense greater than current balance!");
+    return;
+  }
+   
     const newTransaction = {
       type: type,
       date: values.date.format('YYYY-MM-DD'),
