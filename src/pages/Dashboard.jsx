@@ -40,13 +40,13 @@ function Dashboard() {
   }
 
   const onFininsh = (values, type) => {
-     const amount = parseFloat(values.amount);
+    const amount = parseFloat(values.amount);
 
-  if (type === "expense" && amount > totalBalance) {
-    toast.error("Cannot add expense greater than current balance!");
-    return;
-  }
-   
+    if (type === "expense" && amount > totalBalance) {
+      toast.error("Cannot add expense greater than current balance!");
+      return;
+    }
+
     const newTransaction = {
       type: type,
       date: values.date.format('YYYY-MM-DD'),
@@ -64,9 +64,7 @@ function Dashboard() {
         collection(db, `users/${user.uid}/transactions`),
         transaction
       );
-      let newArr = transactions;
-      newArr.push(transaction);
-      setTransactions(newArr);
+      setTransactions((prev) => [...prev, transaction]);
       calculateBanlance();
       console.log("Document written with ID: ", docRef.id);
       toast.success("Transaction Added!")

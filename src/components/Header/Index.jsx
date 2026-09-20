@@ -49,7 +49,7 @@ function Header() {
     };
 
     if (user) {
-      fetchUserName(user).then((name) => {
+      fetchUserName(user).then((name) => { 
         setUserName(name);
       });
     }

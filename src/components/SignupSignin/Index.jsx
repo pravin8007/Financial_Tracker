@@ -33,7 +33,7 @@ function SignupSigninComponent() {
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             // Signed up 
-            const user = userCredential.user;
+            const user = userCredential.user; 
             console.log("User >>>", user);
             toast.success("User Create")
             setLoading(false);
@@ -41,7 +41,7 @@ function SignupSigninComponent() {
             setEmail("");
             setPassword("");
             setConfirmPassword("");
-            createDoc(user);
+            createDoc(user); 
             navigate("/dashboard");
             // create a doc with user id as the following id 
           })
@@ -79,7 +79,7 @@ function SignupSigninComponent() {
       signInWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           // Signed in 
-          const user = userCredential.user;
+          const user = userCredential.user; 
           const userName = await fetchUserName(user);
           console.log("User >>>", user);
           console.log("User Name >>>", userName);
@@ -195,7 +195,7 @@ function SignupSigninComponent() {
               <Button text={loading ? "Loading..." : "Signup Using Email and Password"} onClick={signupWithEmail} disabled={loading} />
               <p className="p-login">or</p>
               <Button text={loading ? "Loading..." : "Signup Using Google"} blue={true} onClick={googleAuth} />
-              <p className="p-login" style={{ cursor: "pointer" }} onClick={() => setLoginForm(!loginForm)}>Or have an Account Already ? Click here </p>
+              <p className="p-login" style={{ cursor: "pointer" }} onClick={() => setLoginForm(!loginForm)}>Or have an Account Already ? Click here </p> 
             </form>
           </div>
       }

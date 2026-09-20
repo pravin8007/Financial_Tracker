@@ -1,5 +1,6 @@
 import { Radio, Select, Table } from "antd"
 import { useState } from "react"
+import PropTypes from 'prop-types'
 import "./Styles.css"
 import searchImg from "../../assets/search.svg"
 import { unparse, parse } from "papaparse"
@@ -45,7 +46,7 @@ function TransactionsTable({ transactions , addTransaction,  fetchTransactions }
     let filterdTransactions = transactions.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
         &&
-        item.type.includes(typeFilter)
+        item.type.includes(typeFilter) 
     );
 
     let sortedTransaction = filterdTransactions.sort((a, b) => {
@@ -61,7 +62,7 @@ function TransactionsTable({ transactions , addTransaction,  fetchTransactions }
     })
 
     function exportCSV() {
-        var csv = unparse({
+        var csv = unparse({ 
             fields: ["name", "amount", "tag", "type", "date"],
             data: transactions.map(({ name, amount, tag, type, date }) => [name, amount, tag, type, date]),
         });
@@ -76,7 +77,7 @@ function TransactionsTable({ transactions , addTransaction,  fetchTransactions }
     }
 
     function importFromCsv(event) {
-        event.preventDefault();
+        event.preventDefault(); 
         try {
             parse(event.target.files[0], {
                 header: true,
@@ -148,8 +149,14 @@ function TransactionsTable({ transactions , addTransaction,  fetchTransactions }
                         <input type="file" id="file-csv" accept=".csv" onChange={importFromCsv} style={{ display: "none" }} required />
                     </div>
                 </div>
-                <Table className="table" dataSource={sortedTransaction} columns={columns} />
+                <Table className="table" dataSource={sortedTransaction} columns={columns} rowKey={(record) => record.id} />
             </div>
         </>
 }
+TransactionsTable.propTypes = {
+    transactions: PropTypes.array.isRequired,
+    addTransaction: PropTypes.func.isRequired,
+    fetchTransactions: PropTypes.func.isRequired,
+}
+
 export default TransactionsTable

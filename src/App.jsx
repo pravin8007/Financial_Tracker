@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
       <Router>
         <Routes>
           <Route path="/" element={<Signup />} />

@@ -1,5 +1,5 @@
 import { Line, Pie } from '@ant-design/charts';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 function ChartComponent({ sortedTransactions }) {
     const data = sortedTransactions.map((item) => {
@@ -8,10 +8,10 @@ function ChartComponent({ sortedTransactions }) {
 
     const spendingData = sortedTransactions.filter(
         (transaction) => {
-            if (transaction.type == "expense") {
-                return { tag: transaction.tag, amount: transaction.amount }
-            }
+        if (transaction.type == "expense") {
+            return { tag: transaction.tag, amount: transaction.amount };
         }
+    }
     );
 
     let finalSpending = spendingData.reduce((acc, obj) => {
@@ -38,22 +38,31 @@ function ChartComponent({ sortedTransactions }) {
         colorField: 'tag',
     };
 
-    let chart;
-    let pieChart;
-
-
     return (
         <div className='charts-wrapper'>
             <div className='chart-1'>
                 <h2>Financial Statistics</h2>
-                <Line {...config} className={"stat"} onReady={(chartInstance) => (chart = chartInstance)} />
+                <Line {...config} className={"stat"} />
             </div>
             <div className='chart-2'>
                 <h2>Your Spending</h2>
-                <Pie {...spendingConfig} className={"pie"} onReady={(chartInstance) => (pieChart = chartInstance)} />
+                <Pie {...spendingConfig} className={"pie"}/>
             </div>
         </div>
     )
 }
+
+ChartComponent.propTypes = { 
+    sortedTransactions: PropTypes.arrayOf(PropTypes.shape({
+        date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+        amount: PropTypes.number,
+        type: PropTypes.string,
+        tag: PropTypes.string,
+    })),
+};
+
+ChartComponent.defaultProps = {
+    sortedTransactions: [],
+};
 
 export default ChartComponent
